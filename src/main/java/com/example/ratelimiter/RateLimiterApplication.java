@@ -249,4 +249,14 @@ public void addInterceptors(InterceptorRegistry registry) {
 }
 }
 
+//  Controller to Test Rate Limiting //
+@RestController
+class TestController {
+
+    @GetMapping("/api/test")
+    public String testRateLimit() {
+        return "Paperflite Request successful-You are not rate limited!";
+    }
+}
+
 
