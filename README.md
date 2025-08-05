@@ -72,6 +72,23 @@ Once the limit is exceeded, the response will be:
 Too many requests - Rate limited
 
 
+When a request is made to /api/test, the following happens:
+
+->Spring Boot receives the request.
+
+->Before reaching the controller, the RateLimitInterceptor intercepts the request.
+
+->The interceptor extracts the X-User-ID from the request headers and identifies the requested URI.
+
+->It calls the RateLimiterService to check if the request is allowed based on the user’s rate limit.
+
+->If allowed, the request proceeds to the TestController which handles and returns the response.
+
+->If blocked, the interceptor immediately returns a 429 Too Many Requests response, preventing further processing.
+
+[ This mechanism ensures users cannot exceed the allowed request limits, protecting the API from abuse or overload ]
+
+
 Author :
 Built by: Sabareeswaran Ganesan
 GitHub: @sabareeswaran30-dev
